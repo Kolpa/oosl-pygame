@@ -20,6 +20,9 @@ class Character(pygame.sprite.Sprite):
         self.rect.centerx = x
         self.rect.centery = y
 
+        self.sound = pygame.mixer.Sound('hit.wav')
+        self.sound.set_volume(0.5)
+
     def shoot(self, target, color):
         shot = Bullet(self.rect, target, color)
 
@@ -28,6 +31,7 @@ class Character(pygame.sprite.Sprite):
 
     def hurt(self):
         self.image.fill((255, 0, 0))
+        self.sound.play()
         Timer(0.25, self.old_color, ()).start()
 
     def old_color(self):

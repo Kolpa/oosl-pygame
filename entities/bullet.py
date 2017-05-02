@@ -22,7 +22,7 @@ class Bullet(pygame.sprite.Sprite):
         self.image = pygame.transform.rotate(self.image, angle)
 
         self.target = pygame.math.Vector2(target[0], target[1])
-        self.me = pygame.math.Vector2(self.rect.x, self.rect.y)
+        self.me = pygame.math.Vector2(self.rect.centerx, self.rect.centery)
 
         self.tick = self.target - self.me
         self.tick = self.tick.normalize()
