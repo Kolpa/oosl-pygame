@@ -6,14 +6,14 @@ from random import randint
 
 
 def display_hp(hp, max, screen):
-    pygame.draw.rect(screen, (60, 179, 113), pygame.Rect(0, 20, max * 25, 25))
-    pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(0, 20, hp * 25, 25))
+    pygame.draw.rect(screen, (60, 179, 113), pygame.Rect(0, 20, max * 22, 25))
+    pygame.draw.rect(screen, (0, 255, 0), pygame.Rect(0, 20, hp * 22, 25))
 
 
 def safe_spawn():
     xy = (randint(0, globals.res[0]), randint(0, globals.res[1]))
 
-    while abs(xy[0] - player.rect.centerx) < 200 and abs(xy[1] - player.rect.centery) < 200:
+    while abs(xy[0] - player.rect.centerx) < 300 and abs(xy[1] - player.rect.centery) < 300:
         xy = (randint(0, globals.res[0]), randint(0, globals.res[1]))
 
     return xy
@@ -78,6 +78,7 @@ while not closed:
 
         for h in hurt:
             hp -= 1
+            player.hurt()
             if hp <= 0:
                 done = True
 
@@ -99,8 +100,11 @@ while not closed:
 
     screen.fill((255, 255, 255))
 
-    lost_text = points_font.render("WE FUCKING LOST", 1, (0, 0, 0))
-    screen.blit(lost_text, (300, 275))
+    lost_text = points_font.render("YOU LOST", 1, (0, 0, 0))
+    screen.blit(lost_text, (350, 275))
+
+    lost_text = points_font.render("Points: {0}".format(points), 1, (0, 0, 0))
+    screen.blit(lost_text, (345, 300))
 
     pygame.display.flip()
 

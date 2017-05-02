@@ -19,14 +19,16 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.centery = pos[1]
 
         self.target = pygame.math.Vector2(player.rect.centerx, player.rect.centery)
-        self.me = pygame.math.Vector2(self.rect.centerx, self.rect.centery)
-
-        self.tick = self.target - self.me
-        self.tick = self.tick.normalize()
 
     def update(self):
-        self.rect.centerx += self.tick[0] * 8
-        self.rect.centery += self.tick[1] * 8
+
+        me = pygame.math.Vector2(self.rect.centerx, self.rect.centery)
+
+        tick = self.target - me
+        tick = tick.normalize()
+
+        self.rect.centerx += tick[0] * 8
+        self.rect.centery += tick[1] * 8
 
         if self.rect.centerx > globals.res[0] or self.rect.centerx < 0:
             self.kill()
